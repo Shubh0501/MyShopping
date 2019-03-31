@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">My Shopping</string>
+    <string name="customer">CUSTOMER</string>
+    <string name="shop_owner">SHOP  OWNER</string>
+    <string name="mall_owner">MALL OWNER</string>
+    <string name="LoginText">LOGIN</string>
+    <string name="CreateNewAccount">CREATE NEW ACCOUNT</string>
+    <string name="createaccount">Please create new account to continue...</string>
+</resources>
