@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mainBackgound"
-    tools:context=".UserInterface.CustomerCreateAccount">
+    tools:context=".UserInterface.CustomerCreateNewAccount">
 
     <TextView
         android:id="@+id/WelcomeCustomerNewAccount"
@@ -149,6 +149,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CustomerConfirmPasswordNewAccount"
         app:layout_constraintVertical_bias="0.3" />
-
 
 </android.support.constraint.ConstraintLayout>

@@ -24,7 +24,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.084" />
+        app:layout_constraintVertical_bias="0.03" />
 
     <TextView
         android:id="@+id/CreateAccountTextShopOwner"
@@ -41,17 +41,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/WelcomeShopOwnerNewAccount"
-        app:layout_constraintVertical_bias="0.048" />
+        app:layout_constraintVertical_bias="0.016" />
 
     <EditText
+        android:id="@+id/ShopUserNameNewAccount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:id="@+id/ShopOwnerNameNewAccount"
-        android:hint="Name"
+        android:hint="Username"
         android:inputType="text"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
@@ -64,7 +64,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CreateAccountTextShopOwner"
-        app:layout_constraintVertical_bias="0.089" />
+        app:layout_constraintVertical_bias="0.091" />
 
     <EditText
         android:id="@+id/ShopOwnerPhoneNumberNewAccount"
@@ -74,7 +74,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:hint="Phone Number"
+        android:hint="Shop Owner Phone Number"
         android:inputType="number"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
@@ -87,10 +87,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ShopOwnerNameNewAccount"
-        app:layout_constraintVertical_bias="0.037" />
+        app:layout_constraintVertical_bias="0.008" />
 
     <EditText
-        android:id="@+id/ShopOwnerPasswordNewAccount"
+        android:id="@+id/ShopPasswordNewAccount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -118,7 +118,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:id="@+id/ShopOwnerConfirmPasswordNewAccount"
+        android:id="@+id/ShopConfirmPasswordNewAccount"
         android:hint="Confirm Password"
         android:inputType="textPassword"
         android:paddingLeft="20dp"
@@ -130,11 +130,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ShopOwnerPasswordNewAccount"
+        app:layout_constraintTop_toBottomOf="@+id/ShopPasswordNewAccount"
         app:layout_constraintVertical_bias="0.061" />
 
     <Button
-        android:id="@+id/ShopOwnerCreateAccountButton"
+        android:id="@+id/ShopCreateAccountButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -147,7 +147,47 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ShopOwnerConfirmPasswordNewAccount"
+        app:layout_constraintTop_toBottomOf="@+id/ShopConfirmPasswordNewAccount"
         app:layout_constraintVertical_bias="0.3" />
+
+    <EditText
+        android:id="@+id/ShopNameNewAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Shop name"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorText"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ShopUserNameNewAccount"
+        app:layout_constraintVertical_bias="0.013" />
+
+    <EditText
+        android:id="@+id/ShopOwnerNameNewAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Shop Owner Name"
+        android:textColorHint="@color/colorText"
+        android:textColor="@color/colorText"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ShopNameNewAccount"
+        app:layout_constraintVertical_bias="0.007" />
 
 </android.support.constraint.ConstraintLayout>

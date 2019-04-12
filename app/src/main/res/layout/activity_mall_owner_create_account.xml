@@ -24,7 +24,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.084" />
+        app:layout_constraintVertical_bias="0.027" />
 
     <TextView
         android:id="@+id/CreateAccountTextMallOwner"
@@ -41,17 +41,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/WelcomeMallOwnerNewAccount"
-        app:layout_constraintVertical_bias="0.048" />
+        app:layout_constraintVertical_bias="0.025" />
 
     <EditText
+        android:id="@+id/MallUserNameNewAccount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:id="@+id/MallOwnerNameNewAccount"
-        android:hint="Name"
+        android:hint="Username"
         android:inputType="text"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
@@ -64,7 +64,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CreateAccountTextMallOwner"
-        app:layout_constraintVertical_bias="0.089" />
+        app:layout_constraintVertical_bias="0.021" />
 
     <EditText
         android:id="@+id/MallOwnerPhoneNumberNewAccount"
@@ -74,7 +74,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:hint="Phone Number"
+        android:hint="Mall Owner Phone Number"
         android:inputType="number"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
@@ -87,10 +87,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MallOwnerNameNewAccount"
-        app:layout_constraintVertical_bias="0.037" />
+        app:layout_constraintVertical_bias="0.024" />
 
     <EditText
-        android:id="@+id/MallOwnerPasswordNewAccount"
+        android:id="@+id/MallPasswordNewAccount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -118,7 +118,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:id="@+id/MallOwnerConfirmPasswordNewAccount"
+        android:id="@+id/MallConfirmPasswordNewAccount"
         android:hint="Confirm Password"
         android:inputType="textPassword"
         android:paddingLeft="20dp"
@@ -130,11 +130,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MallOwnerPasswordNewAccount"
+        app:layout_constraintTop_toBottomOf="@+id/MallPasswordNewAccount"
         app:layout_constraintVertical_bias="0.061" />
 
     <Button
-        android:id="@+id/MallOwnerCreateAccountButton"
+        android:id="@+id/MallCreateAccountButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -147,7 +147,43 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MallOwnerConfirmPasswordNewAccount"
+        app:layout_constraintTop_toBottomOf="@+id/MallConfirmPasswordNewAccount"
         app:layout_constraintVertical_bias="0.3" />
+
+    <EditText
+        android:id="@+id/MallNameNewAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Mall Name"
+        android:gravity="center"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MallUserNameNewAccount"
+        app:layout_constraintVertical_bias="0.033" />
+
+    <EditText
+        android:id="@+id/MallOwnerNameNewAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Mall Owner name"
+        android:gravity="center"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MallNameNewAccount"
+        app:layout_constraintVertical_bias="0.043" />
 
 </android.support.constraint.ConstraintLayout>

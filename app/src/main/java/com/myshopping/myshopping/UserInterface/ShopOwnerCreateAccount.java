@@ -1,17 +1,30 @@
 package com.myshopping.myshopping.UserInterface;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.myshopping.myshopping.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class ShopOwnerCreateAccount extends AppCompatActivity {
 
+    private EditText username;
     private EditText name;
-    private EditText phonenumber;
+    private EditText shop_owner_name;
+    private EditText shop_owner_phone_number;
     private EditText password;
     private EditText confirmpassword;
     private Button createaccount;
@@ -24,16 +37,71 @@ public class ShopOwnerCreateAccount extends AppCompatActivity {
     }
 
     private void connect_attributes() {
-        name = (EditText) findViewById(R.id.ShopOwnerNameNewAccount);
-        phonenumber = (EditText) findViewById(R.id.ShopOwnerPhoneNumberNewAccount);
-        password = (EditText) findViewById(R.id.ShopOwnerPasswordNewAccount);
-        confirmpassword = (EditText) findViewById(R.id.ShopOwnerConfirmPasswordNewAccount);
-        createaccount = (Button) findViewById(R.id.ShopOwnerCreateAccountButton);
+        username = findViewById(R.id.ShopUserNameNewAccount);
+        name = (EditText) findViewById(R.id.ShopNameNewAccount);
+        shop_owner_name = findViewById(R.id.ShopOwnerNameNewAccount);
+        shop_owner_phone_number = (EditText) findViewById(R.id.ShopOwnerPhoneNumberNewAccount);
+        password = (EditText) findViewById(R.id.ShopPasswordNewAccount);
+        confirmpassword = (EditText) findViewById(R.id.ShopConfirmPasswordNewAccount);
+        createaccount = (Button) findViewById(R.id.ShopCreateAccountButton);
 
         createaccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
+                String pass = password.getText().toString();
+                String con_pass = confirmpassword.getText().toString();
+                if(pass.equals(con_pass)){
+                    String url = "localhost:5000/ShopNewAccount";
+                    RequestQueue queue = Volley.newRequestQueue(ShopOwnerCreateAccount.this);
+                    JSONObject json = new JSONObject();
+                    try {
+                        json.put("username", username.getText().toString());
+                        json.put("shop_owner_phone_number", shop_owner_phone_number.getText().toString());
+                        json.put("name", name.getText().toString());
+                        json.put("password", password.getText().toString());
+                        json.put("shop_owner_name", shop_owner_name.getText().toString());
+                    } catch (JSONException e) {
+                        Toast.makeText(ShopOwnerCreateAccount.this, e.getMessage(),
+                                Toast.LENGTH_LONG).show();
+                    }
+                    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, json,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    try {
+                                        String phone_number = response.getString("shop_owner_phone_number");
+                                        String name = response.getString("name");
+                                        String username = response.getString("username");
+                                        String shop_o_name = response.getString("shop_owner_name");
+                                        Intent intent = new Intent(ShopOwnerCreateAccount.this,
+                                                ShopOwnerProfile.class);
+                                        intent.putExtra("phone_number", phone_number);
+                                        intent.putExtra("name", name);
+                                        intent.putExtra("username", username);
+                                        intent.putExtra("shop_owner_name", shop_o_name);
+                                        startActivity(intent);
+                                        finish();
+                                    } catch (JSONException e) {
+                                        Toast.makeText(ShopOwnerCreateAccount.this,
+                                                e.getMessage(), Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(ShopOwnerCreateAccount.this, "Sorry, Error" +
+                                            " while creating a new account. Please try again",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    queue.add(request);
+                }
+                else{
+                    Toast.makeText(ShopOwnerCreateAccount.this, "Password does not match",
+                            Toast.LENGTH_LONG).show();
+                    password.setText("");
+                    confirmpassword.setText("");
+                }
             }
         });
     }

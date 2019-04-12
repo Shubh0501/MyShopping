@@ -9,7 +9,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.myshopping.myshopping.AdatptersAndInterface.CallBackInterface;
 import com.myshopping.myshopping.R;
 
@@ -21,14 +28,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button customerbutton;
     private Button shopownerbutton;
     private Button mallownerbutton;
+    private Volley volley;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         connect_attributes();
-
-
+        volley = new Volley();
     }
 
     private void connect_attributes() {
@@ -50,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mallownerbutton.setVisibility(View.INVISIBLE);
         switch(v.getId()) {
             case R.id.CustomerButton :
+
                 CustomerLoginPageFragment customerLoginPageFragment = new CustomerLoginPageFragment();
                 customerLoginPageFragment.setCallBackInterface(this);
                 transaction.add(frameLayout.getId(), customerLoginPageFragment);
@@ -93,9 +101,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void CustomerCallBack(int id) {
          switch (id){
              case R.id.CustomerLoginButton:
-                 startActivity(new Intent(MainActivity.this, CustomerProfile.class));
-                 finish();
-                 break;
+                 RequestQueue queue = volley.newRequestQueue(this);
+                 String url = "localhost:5000/CustomerLogin";
+                 StringRequest request = new StringRequest(Request.Method.GET, url,
+                         new Response.Listener<String>() {
+                             @Override
+                             public void onResponse(String response) {
+                                 if(response.equals("TRUE")){
+                                     startActivity(new Intent(MainActivity.this,
+                                             CustomerProfile.class));
+                                     finish();
+                                 }
+                                 else{
+                                     Toast.makeText(MainActivity.this,
+                                             "Password incorrect. Please try again !",
+                                             Toast.LENGTH_LONG).show();
+                                 }
+                             }
+                         },
+                         new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(MainActivity.this,
+                                        "Phone Number not registered. Please create new account!",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                 });
+                 queue.add(request);
 
              case R.id.CustomerCreateNewAccount:
                  startActivity(new Intent(MainActivity.this, CustomerCreateAccount.class));
