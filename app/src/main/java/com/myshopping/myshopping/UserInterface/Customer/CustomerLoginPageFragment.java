@@ -29,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import static com.myshopping.myshopping.R.id.CustomerLoginButton;
+import static com.myshopping.myshopping.R.id.shortcut;
 import static com.myshopping.myshopping.R.id.start;
 
 public class CustomerLoginPageFragment extends Fragment implements View.OnClickListener {
@@ -50,10 +51,10 @@ public class CustomerLoginPageFragment extends Fragment implements View.OnClickL
     }
 
     private void connect_attributes() {
-        username = (EditText) rootview.findViewById(R.id.CustomerUsernameEditText);
-        password = (EditText) rootview.findViewById(R.id.CustomerPasswordEditText);
-        loginbutton = (Button) rootview.findViewById(CustomerLoginButton);
-        createnewaccountbutton = (Button) rootview.findViewById(R.id.CustomerCreateNewAccount);
+        username = rootview.findViewById(R.id.CustomerUsernameEditText);
+        password = rootview.findViewById(R.id.CustomerPasswordEditText);
+        loginbutton = rootview.findViewById(CustomerLoginButton);
+        createnewaccountbutton = rootview.findViewById(R.id.CustomerCreateNewAccount);
         loginbutton.setOnClickListener(this);
         createnewaccountbutton.setOnClickListener(this);
     }
@@ -68,7 +69,7 @@ public class CustomerLoginPageFragment extends Fragment implements View.OnClickL
             switch (v.getId()) {
                 case R.id.CustomerLoginButton:
                     if(username.getText().toString().equals("")|| password.getText().toString().equals("")){
-                        Toast.makeText(getContext(), "Not a valid username or password", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), Utils.FILL_ALL_DETAILS, Toast.LENGTH_SHORT).show();
                     }
                     else {
                         RequestQueue queue = Volley.newRequestQueue(getContext());
@@ -79,7 +80,7 @@ public class CustomerLoginPageFragment extends Fragment implements View.OnClickL
                             Log.e("password", password.getText().toString());
                             jsonObject.put("password", password.getText().toString());
                         } catch (JSONException e) {
-                            Toast.makeText(getContext(), "Error connecting", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), Utils.ERROR_GETTING_DATA, Toast.LENGTH_SHORT).show();
                         }
                         String url = Utils.CUSTOMER_LOGIN;
                         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
@@ -99,21 +100,22 @@ public class CustomerLoginPageFragment extends Fragment implements View.OnClickL
                                             } catch (JSONException e) {
 
                                             }
-                                            SharedPreferences preferences = getActivity().getSharedPreferences("MyShopping", getActivity().MODE_PRIVATE);
-                                            preferences.edit().putString("customer_phone_number", username.getText().toString()).apply();
-                                            preferences.edit().putString("customer_name", name).apply();
-                                            preferences.edit().putString("customer_password", password.getText().toString()).apply();
-                                            preferences.edit().putString("last_login", "customer").apply();
+                                            SharedPreferences preferences = getActivity().
+                                                    getSharedPreferences(Utils.APPLICATION_NAME, getActivity().MODE_PRIVATE);
+                                            preferences.edit().putString(Utils.CUSTOMER_PHONE_NUMBER, username.getText().toString()).apply();
+                                            preferences.edit().putString(Utils.CUSTOMER_NAME, name).apply();
+                                            preferences.edit().putString(Utils.CUSTOMER_PASSWORD, password.getText().toString()).apply();
+                                            preferences.edit().putString(Utils.LAST_LOGIN, "customer").apply();
                                             callBackInterface.CustomerCallBack(R.id.CustomerLoginButton);
                                         } else {
-                                            Toast.makeText(getContext(), "Please check your " +
-                                                    "password or phone number", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getContext(), Utils.WRONG_CREDENTIALS, Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(getContext(), "error connecting to the internet", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), Utils.ERROR_CONNECTING_TO_INTERNET,
+                                        Toast.LENGTH_SHORT).show();
                             }
                         });
                         queue.add(request);
@@ -126,7 +128,7 @@ public class CustomerLoginPageFragment extends Fragment implements View.OnClickL
             }
         }
         else{
-            Toast.makeText(rootview.getContext(), "Error connecting to the internet", Toast.LENGTH_LONG)
+            Toast.makeText(rootview.getContext(), Utils.ERROR_CONNECTING_TO_INTERNET, Toast.LENGTH_LONG)
                     .show();
         }
     }

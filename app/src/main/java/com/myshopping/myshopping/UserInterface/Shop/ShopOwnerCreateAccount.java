@@ -40,12 +40,12 @@ public class ShopOwnerCreateAccount extends AppCompatActivity {
 
     private void connect_attributes() {
         username = findViewById(R.id.ShopUserNameNewAccount);
-        name = (EditText) findViewById(R.id.ShopNameNewAccount);
+        name = findViewById(R.id.ShopNameNewAccount);
         shop_owner_name = findViewById(R.id.ShopOwnerNameNewAccount);
-        shop_owner_phone_number = (EditText) findViewById(R.id.ShopOwnerPhoneNumberNewAccount);
-        password = (EditText) findViewById(R.id.ShopPasswordNewAccount);
-        confirmpassword = (EditText) findViewById(R.id.ShopConfirmPasswordNewAccount);
-        createaccount = (Button) findViewById(R.id.ShopCreateAccountButton);
+        shop_owner_phone_number = findViewById(R.id.ShopOwnerPhoneNumberNewAccount);
+        password = findViewById(R.id.ShopPasswordNewAccount);
+        confirmpassword = findViewById(R.id.ShopConfirmPasswordNewAccount);
+        createaccount = findViewById(R.id.ShopCreateAccountButton);
 
         createaccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +53,8 @@ public class ShopOwnerCreateAccount extends AppCompatActivity {
                 if(username.getText().toString().equals("")||name.getText().toString().equals("")||
                 shop_owner_phone_number.getText().toString().equals("")|| shop_owner_name.getText().toString().equals("")||
                 password.getText().toString().equals("")){
-                    Toast.makeText(ShopOwnerCreateAccount.this, "Please fill all the fields !", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ShopOwnerCreateAccount.this, Utils.FILL_ALL_DETAILS,
+                            Toast.LENGTH_SHORT).show();
                 }
                 else {
                     String pass = password.getText().toString();
@@ -83,13 +84,14 @@ public class ShopOwnerCreateAccount extends AppCompatActivity {
                                             String shop_o_name = response.getString("shop_owner_name");
                                             Intent intent = new Intent(ShopOwnerCreateAccount.this,
                                                     ShopOwnerProfile.class);
-                                            SharedPreferences preferences = getSharedPreferences("MyShopping", MODE_PRIVATE);
-                                            preferences.edit().putString("shop_owner_phone_number", phone_number).apply();
-                                            preferences.edit().putString("shop_name", name).apply();
-                                            preferences.edit().putString("shop_password", password.getText().toString()).apply();
-                                            preferences.edit().putString("last_login", "shop").apply();
-                                            preferences.edit().putString("shop_owner_name", shop_o_name).apply();
-                                            preferences.edit().putString("shop_username", username).apply();
+                                            SharedPreferences preferences = getSharedPreferences
+                                                    (Utils.APPLICATION_NAME, MODE_PRIVATE);
+                                            preferences.edit().putString(Utils.SHOP_OWNER_PHONE_NUMBER, phone_number).apply();
+                                            preferences.edit().putString(Utils.SHOP_NAME, name).apply();
+                                            preferences.edit().putString(Utils.SHOP_PASSWORD, password.getText().toString()).apply();
+                                            preferences.edit().putString(Utils.LAST_LOGIN, "shop").apply();
+                                            preferences.edit().putString(Utils.SHOP_OWNER_NAME, shop_o_name).apply();
+                                            preferences.edit().putString(Utils.SHOP_USERNAME, username).apply();
                                             startActivity(intent);
                                             finish();
                                         } catch (JSONException e) {
@@ -100,14 +102,13 @@ public class ShopOwnerCreateAccount extends AppCompatActivity {
                                 }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(ShopOwnerCreateAccount.this, "Sorry, Error" +
-                                                " while creating a new account. Please try again",
+                                Toast.makeText(ShopOwnerCreateAccount.this, Utils.ERROR_CREATING_NEW_ACCOUNT,
                                         Toast.LENGTH_LONG).show();
                             }
                         });
                         queue.add(request);
                     } else {
-                        Toast.makeText(ShopOwnerCreateAccount.this, "Password does not match",
+                        Toast.makeText(ShopOwnerCreateAccount.this, Utils.PASSWORD_NOT_MATCH,
                                 Toast.LENGTH_LONG).show();
                         password.setText("");
                         confirmpassword.setText("");

@@ -64,7 +64,7 @@ public class MallOwnerLoginPageFragment extends Fragment implements View.OnClick
             switch (v.getId()) {
                 case R.id.MallOwnerLoginButton:
                     if(username.getText().toString().equals("")||password.getText().toString().equals("")){
-                        Toast.makeText(getContext(), "Not a valid username or password", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), Utils.FILL_ALL_DETAILS, Toast.LENGTH_SHORT).show();
                     }
                     else {
                         RequestQueue queue = Volley.newRequestQueue(getContext());
@@ -84,7 +84,7 @@ public class MallOwnerLoginPageFragment extends Fragment implements View.OnClick
                                         try {
                                             object = response.getString("status");
                                         } catch (JSONException e) {
-                                            Toast.makeText(getContext(), "Error getting data", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getContext(), Utils.ERROR_GETTING_DATA, Toast.LENGTH_SHORT).show();
                                         }
                                         if (object.equals("TRUE")) {
                                             String name = "";
@@ -98,23 +98,22 @@ public class MallOwnerLoginPageFragment extends Fragment implements View.OnClick
 
                                             }
                                             SharedPreferences preferences = getActivity().
-                                                    getSharedPreferences("MyShopping", getActivity().MODE_PRIVATE);
-                                            preferences.edit().putString("mall_owner_phone_number", owner_phone_number).apply();
-                                            preferences.edit().putString("mall_name", name).apply();
-                                            preferences.edit().putString("mall_password", password.getText().toString()).apply();
-                                            preferences.edit().putString("last_login", "mall").apply();
-                                            preferences.edit().putString("mall_owner_name", owner_name).apply();
-                                            preferences.edit().putString("mall_username", username.getText().toString()).apply();
+                                                    getSharedPreferences(Utils.APPLICATION_NAME, getActivity().MODE_PRIVATE);
+                                            preferences.edit().putString(Utils.MALL_OWNER_PHONE_NUMBER, owner_phone_number).apply();
+                                            preferences.edit().putString(Utils.MALL_NAME, name).apply();
+                                            preferences.edit().putString(Utils.MALL_PASSWORD, password.getText().toString()).apply();
+                                            preferences.edit().putString(Utils.LAST_LOGIN, "mall").apply();
+                                            preferences.edit().putString(Utils.MALL_OWNER_NAME, owner_name).apply();
+                                            preferences.edit().putString(Utils.MALL_USERNAME, username.getText().toString()).apply();
                                             callBackInterface.MallOwnerCallBack(R.id.MallOwnerLoginButton);
                                         } else {
-                                            Toast.makeText(getContext(), "Please check your " +
-                                                    "password or phone number", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getContext(), Utils.WRONG_CREDENTIALS, Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(getContext(), "Could not connect", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), Utils.ERROR_CONNECTING_TO_INTERNET, Toast.LENGTH_LONG).show();
                             }
                         });
                         queue.add(request);
@@ -127,7 +126,7 @@ public class MallOwnerLoginPageFragment extends Fragment implements View.OnClick
             }
         }
         else{
-            Toast.makeText(rootview.getContext(), "Error connecting to the internet",
+            Toast.makeText(rootview.getContext(), Utils.ERROR_CONNECTING_TO_INTERNET,
                     Toast.LENGTH_LONG).show();
         }
     }

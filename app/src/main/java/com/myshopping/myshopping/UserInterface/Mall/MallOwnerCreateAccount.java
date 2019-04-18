@@ -39,10 +39,10 @@ public class MallOwnerCreateAccount extends AppCompatActivity {
     }
 
     private void connect_attributes() {
-        username = (EditText) findViewById(R.id.MallUserNameNewAccount);
-        name = (EditText) findViewById(R.id.MallNameNewAccount);
-        mall_owner_name = (EditText) findViewById(R.id.MallOwnerNameNewAccount);
-        mall_owner_phone_number = (EditText) findViewById(R.id.MallOwnerPhoneNumberNewAccount);
+        username = findViewById(R.id.MallUserNameNewAccount);
+        name = findViewById(R.id.MallNameNewAccount);
+        mall_owner_name = findViewById(R.id.MallOwnerNameNewAccount);
+        mall_owner_phone_number = findViewById(R.id.MallOwnerPhoneNumberNewAccount);
         password = findViewById(R.id.MallPasswordNewAccount);
         confirmpassword = findViewById(R.id.MallConfirmPasswordNewAccount);
         createaccount = findViewById(R.id.MallCreateAccountButton);
@@ -53,7 +53,8 @@ public class MallOwnerCreateAccount extends AppCompatActivity {
                 if(username.getText().toString().equals("")||name.getText().toString().equals("")||
                 mall_owner_name.getText().toString().equals("")||mall_owner_phone_number.getText().toString().equals("")||
                 password.getText().toString().equals("")){
-                    Toast.makeText(MallOwnerCreateAccount.this, "Please fill all the fields !", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MallOwnerCreateAccount.this, Utils.FILL_ALL_DETAILS,
+                            Toast.LENGTH_SHORT).show();
                 }
                 else {
                     String pass = password.getText().toString();
@@ -83,13 +84,14 @@ public class MallOwnerCreateAccount extends AppCompatActivity {
                                             String name = response.getString("name");
                                             Intent intent = new Intent(MallOwnerCreateAccount.this,
                                                     MallOwnerProfile.class);
-                                            SharedPreferences preferences = getSharedPreferences("MyShopping", MODE_PRIVATE);
-                                            preferences.edit().putString("mall_owner_phone_number", phone_number).apply();
-                                            preferences.edit().putString("mall_name", name).apply();
-                                            preferences.edit().putString("mall_password", password.getText().toString()).apply();
-                                            preferences.edit().putString("last_login", "mall").apply();
-                                            preferences.edit().putString("mall_owner_name", mall_o_name).apply();
-                                            preferences.edit().putString("mall_username", username).apply();
+                                            SharedPreferences preferences = getSharedPreferences
+                                                    (Utils.APPLICATION_NAME, MODE_PRIVATE);
+                                            preferences.edit().putString(Utils.MALL_OWNER_PHONE_NUMBER, phone_number).apply();
+                                            preferences.edit().putString(Utils.MALL_NAME, name).apply();
+                                            preferences.edit().putString(Utils.MALL_PASSWORD, password.getText().toString()).apply();
+                                            preferences.edit().putString(Utils.LAST_LOGIN, "mall").apply();
+                                            preferences.edit().putString(Utils.MALL_OWNER_NAME, mall_o_name).apply();
+                                            preferences.edit().putString(Utils.MALL_USERNAME, username).apply();
                                             startActivity(intent);
                                             finish();
                                         } catch (JSONException e) {
@@ -100,14 +102,13 @@ public class MallOwnerCreateAccount extends AppCompatActivity {
                                 }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(MallOwnerCreateAccount.this, "Sorry, Error" +
-                                                " while creating a new account. Please try again",
+                                Toast.makeText(MallOwnerCreateAccount.this, Utils.ERROR_CREATING_NEW_ACCOUNT,
                                         Toast.LENGTH_LONG).show();
                             }
                         });
                         queue.add(request);
                     } else {
-                        Toast.makeText(MallOwnerCreateAccount.this, "Password does not match",
+                        Toast.makeText(MallOwnerCreateAccount.this, Utils.PASSWORD_NOT_MATCH,
                                 Toast.LENGTH_LONG).show();
                         password.setText("");
                         confirmpassword.setText("");

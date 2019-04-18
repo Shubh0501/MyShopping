@@ -43,10 +43,10 @@ public class ShopOwnerLoginPageFragment extends Fragment implements View.OnClick
     }
 
     private void connect_attributes() {
-        username = (EditText) rootview.findViewById(R.id.ShopOwnerUsernameEditText);
-        password = (EditText) rootview.findViewById(R.id.ShopOwnerPasswordEditText);
-        loginbutton = (Button) rootview.findViewById(R.id.ShopOwnerLoginButton);
-        createnewaccountbutton = (Button) rootview.findViewById(R.id.ShopOwnerCreateNewAccount);
+        username = rootview.findViewById(R.id.ShopOwnerUsernameEditText);
+        password = rootview.findViewById(R.id.ShopOwnerPasswordEditText);
+        loginbutton = rootview.findViewById(R.id.ShopOwnerLoginButton);
+        createnewaccountbutton =rootview.findViewById(R.id.ShopOwnerCreateNewAccount);
         loginbutton.setOnClickListener(this);
         createnewaccountbutton.setOnClickListener(this);
     }
@@ -61,7 +61,7 @@ public class ShopOwnerLoginPageFragment extends Fragment implements View.OnClick
             switch (v.getId()) {
                 case R.id.ShopOwnerLoginButton:
                     if(username.getText().toString().equals("")||password.getText().toString().equals("")){
-                        Toast.makeText(getContext(), "Not a valid username or password", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), Utils.FILL_ALL_DETAILS, Toast.LENGTH_LONG).show();
                     }
                     else {
                         RequestQueue queue = Volley.newRequestQueue(getContext());
@@ -70,7 +70,7 @@ public class ShopOwnerLoginPageFragment extends Fragment implements View.OnClick
                             jsonObject.put("username", username.getText().toString());
                             jsonObject.put("password", password.getText().toString());
                         } catch (JSONException e) {
-                            Toast.makeText(getContext(), "Error getting data", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), Utils.ERROR_GETTING_DATA, Toast.LENGTH_LONG).show();
                         }
                         String url = Utils.SHOP_LOGIN;
                         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
@@ -92,26 +92,27 @@ public class ShopOwnerLoginPageFragment extends Fragment implements View.OnClick
                                                 owner_name = response.getString("owner_name");
                                                 owner_phone_number = response.getString("owner_phone_number");
                                             } catch (JSONException e) {
-                                                Toast.makeText(getContext(), "Error", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(getContext(), Utils.ERROR_GETTING_DATA
+                                                        , Toast.LENGTH_SHORT).show();
                                             }
                                             SharedPreferences preferences = getActivity().
-                                                    getSharedPreferences("MyShopping", getActivity().MODE_PRIVATE);
-                                            preferences.edit().putString("shop_owner_phone_number", owner_phone_number).apply();
-                                            preferences.edit().putString("shop_name", name).apply();
-                                            preferences.edit().putString("shop_password", password.getText().toString()).apply();
-                                            preferences.edit().putString("last_login", "shop").apply();
-                                            preferences.edit().putString("shop_owner_name", owner_name).apply();
-                                            preferences.edit().putString("shop_username", username.getText().toString()).apply();
+                                                    getSharedPreferences(Utils.APPLICATION_NAME, getActivity().MODE_PRIVATE);
+                                            preferences.edit().putString(Utils.SHOP_OWNER_PHONE_NUMBER, owner_phone_number).apply();
+                                            preferences.edit().putString(Utils.SHOP_NAME, name).apply();
+                                            preferences.edit().putString(Utils.SHOP_PASSWORD, password.getText().toString()).apply();
+                                            preferences.edit().putString(Utils.LAST_LOGIN, "shop").apply();
+                                            preferences.edit().putString(Utils.SHOP_OWNER_NAME, owner_name).apply();
+                                            preferences.edit().putString(Utils.SHOP_USERNAME, username.getText().toString()).apply();
                                             callBackInterface.ShopOwnerCallBack(R.id.ShopOwnerLoginButton);
                                         } else {
-                                            Toast.makeText(getContext(), "Please check your " +
-                                                    "password or phone number", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getContext(), Utils.WRONG_CREDENTIALS,
+                                                    Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(getContext(), "Could not connect", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), Utils.ERROR_CONNECTING_TO_INTERNET, Toast.LENGTH_SHORT).show();
                             }
                         });
                         queue.add(request);
@@ -124,8 +125,8 @@ public class ShopOwnerLoginPageFragment extends Fragment implements View.OnClick
             }
         }
         else{
-            Toast.makeText(rootview.getContext(), "Error connecting to the internet",
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(rootview.getContext(), Utils.ERROR_CONNECTING_TO_INTERNET,
+                    Toast.LENGTH_SHORT).show();
         }
     }
 }

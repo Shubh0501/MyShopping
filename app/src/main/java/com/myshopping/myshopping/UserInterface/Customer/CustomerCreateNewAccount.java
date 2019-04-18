@@ -55,7 +55,8 @@ public class CustomerCreateNewAccount extends AppCompatActivity {
             public void onClick(View v) {
                 if(customername.getText().toString().equals("")||customerphonenumber.getText().toString().equals("")||
                 customerpassword.getText().toString().equals("")){
-                    Toast.makeText(CustomerCreateNewAccount.this, "Please fill all the fields !", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CustomerCreateNewAccount.this, Utils.FILL_ALL_DETAILS,
+                            Toast.LENGTH_SHORT).show();
                 }
                 else {
                     String pass = customerpassword.getText().toString();
@@ -81,11 +82,11 @@ public class CustomerCreateNewAccount extends AppCompatActivity {
                                             String name = response.getString("name");
                                             Intent intent = new Intent(CustomerCreateNewAccount.this,
                                                     CustomerProfile.class);
-                                            SharedPreferences preferences = getSharedPreferences("MyShopping", MODE_PRIVATE);
-                                            preferences.edit().putString("customer_phone_number", phone_number).apply();
-                                            preferences.edit().putString("customer_name", name).apply();
-                                            preferences.edit().putString("customer_password", customerpassword.getText().toString()).apply();
-                                            preferences.edit().putString("last_login", "customer").apply();
+                                            SharedPreferences preferences = getSharedPreferences(Utils.APPLICATION_NAME, MODE_PRIVATE);
+                                            preferences.edit().putString(Utils.CUSTOMER_PHONE_NUMBER, phone_number).apply();
+                                            preferences.edit().putString(Utils.CUSTOMER_NAME, name).apply();
+                                            preferences.edit().putString(Utils.CUSTOMER_PASSWORD, customerpassword.getText().toString()).apply();
+                                            preferences.edit().putString(Utils.LAST_LOGIN, "customer").apply();
                                             startActivity(intent);
                                             finish();
                                         } catch (JSONException e) {
@@ -96,9 +97,8 @@ public class CustomerCreateNewAccount extends AppCompatActivity {
                                 }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(CustomerCreateNewAccount.this, "Sorry, Error" +
-                                                " while creating a new account. Please try again",
-                                        Toast.LENGTH_LONG).show();
+                                Toast.makeText(CustomerCreateNewAccount.this, Utils.ERROR_CREATING_NEW_ACCOUNT,
+                                        Toast.LENGTH_SHORT).show();
 
                             }
                         });
@@ -107,8 +107,8 @@ public class CustomerCreateNewAccount extends AppCompatActivity {
                                         DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                         queue.add(request);
                     } else {
-                        Toast.makeText(CustomerCreateNewAccount.this, "Password does not match",
-                                Toast.LENGTH_LONG).show();
+                        Toast.makeText(CustomerCreateNewAccount.this, Utils.PASSWORD_NOT_MATCH,
+                                Toast.LENGTH_SHORT).show();
                         customerpassword.setText("");
                         customerconfirmpassword.setText("");
                     }

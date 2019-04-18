@@ -11,8 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -51,65 +49,6 @@ public class CustomerShoppingListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        list = view.findViewById(R.id.customerrecyclerview);
-//        list.setHasFixedSize(true);
-//        list.setLayoutManager(new LinearLayoutManager(getContext()));
-//        items = new ArrayList<>();
-//        SharedPreferences preferences = getActivity().getSharedPreferences("MyShopping", getActivity().MODE_PRIVATE);
-//        String customer_phone_number = preferences.getString("customer_phone_number", "0000000000");
-//        String url = Utils.GET_SHOPPING_LIST;
-//        RequestQueue queue = Volley.newRequestQueue(getContext());
-//        try {
-//            json.put("customer_phone_number", customer_phone_number);
-//        } catch (JSONException e) {
-//            Toast.makeText(getContext(), "Error getting data", Toast.LENGTH_SHORT).show();
-//        }
-//        JSONArray array = new JSONArray();
-//        array.put(json);
-//        final JsonArrayRequest request = new JsonArrayRequest(Request.Method.POST, url, array,
-//                new Response.Listener<JSONArray>() {
-//                    @Override
-//                    public void onResponse(JSONArray response) {
-//                        shopping_list = response;
-//                        ListItem item = new ListItem();
-//                        for(int i = 0; i < response.length(); i++){
-//                            Log.e("phone", "loop");
-//                            JSONObject here = null;
-//                            try {
-//                                here = response.getJSONObject(i);
-//                            } catch (JSONException e) {
-//                                Toast.makeText(getContext(), "Error fetching data",
-//                                        Toast.LENGTH_SHORT).show();
-//                            }
-//                            try {
-//                                Log.e("phone", String.valueOf(response.length()));
-//                                String shop_username = here.getString("shop_username");
-//                                String quantity = here.getString("quantity");
-//                                String datetime = here.getString("datetime");
-//                                String product_name = here.getString("product_name");
-//                                item.setProduct_name(product_name);
-//                                item.setDate(datetime);
-//                                item.setProduct_quantity(quantity);
-//                                item.setShop_name(shop_username);
-//                            } catch (JSONException e) {
-//                                Toast.makeText(getContext(), "Error getting data",
-//                                        Toast.LENGTH_SHORT).show();
-//                            }
-//                            items.add(item);
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(getContext(), "Error fetching data from server",
-//                                Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//        queue.add(request);
-//
-//        adapter = new CustomerAdapter(getContext(), items);
-//        list.setAdapter(adapter);
     }
 
     @Override
@@ -119,14 +58,15 @@ public class CustomerShoppingListFragment extends Fragment {
         list.setHasFixedSize(true);
         list.setLayoutManager(new LinearLayoutManager(getContext()));
         items = new ArrayList<>();
-        SharedPreferences preferences = getActivity().getSharedPreferences("MyShopping", getActivity().MODE_PRIVATE);
-        String customer_phone_number = preferences.getString("customer_phone_number", "0000000000");
+        SharedPreferences preferences = getActivity().getSharedPreferences
+                (Utils.APPLICATION_NAME, getActivity().MODE_PRIVATE);
+        String customer_phone_number = preferences.getString(Utils.CUSTOMER_PHONE_NUMBER, "0000000000");
         String url = Utils.GET_SHOPPING_LIST;
         RequestQueue queue = Volley.newRequestQueue(getContext());
         try {
             json.put("customer_phone_number", customer_phone_number);
         } catch (JSONException e) {
-            Toast.makeText(getContext(), "Error getting data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), Utils.ERROR_GETTING_DATA, Toast.LENGTH_SHORT).show();
         }
         JSONArray array = new JSONArray();
         array.put(json);
@@ -142,7 +82,7 @@ public class CustomerShoppingListFragment extends Fragment {
                             try {
                                 here = response.getJSONObject(i);
                             } catch (JSONException e) {
-                                Toast.makeText(getContext(), "Error fetching data",
+                                Toast.makeText(getContext(), Utils.ERROR_FETCHING_DATA,
                                         Toast.LENGTH_SHORT).show();
                             }
                             try {
@@ -156,7 +96,7 @@ public class CustomerShoppingListFragment extends Fragment {
                                 item.setProduct_quantity(quantity);
                                 item.setShop_name(shop_username);
                             } catch (JSONException e) {
-                                Toast.makeText(getContext(), "Error getting data",
+                                Toast.makeText(getContext(), Utils.ERROR_GETTING_DATA,
                                         Toast.LENGTH_SHORT).show();
                             }
                             items.add(item);
@@ -166,7 +106,7 @@ public class CustomerShoppingListFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(), "Error fetching data from server",
+                        Toast.makeText(getContext(), Utils.ERROR_FETCHING_DATA,
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
