@@ -50,11 +50,6 @@ public class CustomerShoppingListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
         list.setHasFixedSize(true);
         list.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
         items = new ArrayList<>();
@@ -114,5 +109,6 @@ public class CustomerShoppingListFragment extends Fragment {
 
         adapter = new CustomerAdapter(this.getActivity(), items);
         list.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 }
