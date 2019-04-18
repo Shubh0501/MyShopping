@@ -13,13 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".UserInterface.CustomerCreateNewAccount"></activity>
-        <activity android:name=".UserInterface.CustomerCreateAccount" />
-        <activity android:name=".UserInterface.MallOwnerCreateAccount" />
-        <activity android:name=".UserInterface.ShopOwnerCreateAccount" />
-        <activity android:name=".UserInterface.MallOwnerProfile" />
-        <activity android:name=".UserInterface.ShopOwnerProfile" />
-        <activity android:name=".UserInterface.CustomerProfile" />
+        <activity
+            android:name=".UserInterface.Customer.CustomerProfile"
+            android:label="@string/title_activity_customer_profile"></activity>
+        <activity android:name=".UserInterface.Customer.CustomerCreateNewAccount" />
+        <activity android:name=".UserInterface.Mall.MallOwnerCreateAccount" />
+        <activity android:name=".UserInterface.Shop.ShopOwnerCreateAccount" />
+        <activity android:name=".UserInterface.Mall.MallOwnerProfile" />
+        <activity android:name=".UserInterface.Shop.ShopOwnerProfile" />
         <activity
             android:name=".UserInterface.MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|keyboard">

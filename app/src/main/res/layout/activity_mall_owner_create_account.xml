@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mainBackgound"
-    tools:context=".UserInterface.MallOwnerCreateAccount">
+    tools:context=".UserInterface.Mall.MallOwnerCreateAccount">
 
     <TextView
         android:id="@+id/WelcomeMallOwnerNewAccount"

@@ -6,4 +6,14 @@
     <string name="LoginText">LOGIN</string>
     <string name="CreateNewAccount">CREATE NEW ACCOUNT</string>
     <string name="createaccount">Please create new account to continue...</string>
+    <string name="title_activity_customer_profile">CustomerProfile</string>
+    <string name="title_shopping_list">Shoppings</string>
+    <string name="title_search">Search</string>
+    <string name="title_account">Account</string>
+    <string name="shopname">Shop Name</string>
+    <string name="search">Search</string>
+    <string name="title_shop_list">Shop</string>
+    <string name="title_sell_list">Receipts</string>
+    <string name="title_products">Products</string>
+    <string name="title_employee">Employees</string>
 </resources>
