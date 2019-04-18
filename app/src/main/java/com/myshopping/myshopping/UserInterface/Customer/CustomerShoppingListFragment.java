@@ -43,6 +43,7 @@ public class CustomerShoppingListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_customer_shopping_list, container, false);
+        list = view.findViewById(R.id.customerrecyclerview);
         return view;
     }
 
@@ -54,9 +55,8 @@ public class CustomerShoppingListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        list = view.findViewById(R.id.customerrecyclerview);
         list.setHasFixedSize(true);
-        list.setLayoutManager(new LinearLayoutManager(getContext()));
+        list.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
         items = new ArrayList<>();
         SharedPreferences preferences = getActivity().getSharedPreferences
                 (Utils.APPLICATION_NAME, getActivity().MODE_PRIVATE);
@@ -112,7 +112,7 @@ public class CustomerShoppingListFragment extends Fragment {
                 });
         queue.add(request);
 
-        adapter = new CustomerAdapter(getContext(), items);
+        adapter = new CustomerAdapter(this.getActivity(), items);
         list.setAdapter(adapter);
     }
 }

@@ -12,8 +12,6 @@ import android.widget.TextView;
 import com.myshopping.myshopping.R;
 import com.myshopping.myshopping.UserInterface.Customer.Model.ListItem;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHolder> {
@@ -30,7 +28,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.
-                card_view_customer_recycler_view, viewGroup, false);
+                card_view_customer_recycler_view, viewGroup, true);
         return new ViewHolder(view);
     }
 
