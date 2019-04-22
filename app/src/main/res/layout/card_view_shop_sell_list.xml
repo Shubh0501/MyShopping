@@ -15,7 +15,7 @@
             android:background="@color/mainBackgound"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/customertransactionidtext"
+                android:id="@+id/shopselltransactionidtext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorText"
@@ -24,27 +24,28 @@
                 android:textStyle="bold"
                 />
             <TextView
-                android:id="@+id/customershopnametext"
+                android:id="@+id/shopsellcustomerphonetext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorText"
-                android:textSize="24sp"
-                android:layout_below="@id/customertransactionidtext"
+                android:textSize="16sp"
+                android:layout_below="@id/shopselltransactionidtext"
                 android:layout_marginStart="10dp"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="7dp"
                 />
             <TextView
-                android:id="@+id/customerdatetext"
+                android:id="@+id/shopselldatetext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:layout_below="@id/customertransactionidtext"
+                android:textSize="16sp"
+                android:layout_below="@id/shopselltransactionidtext"
                 android:layout_alignParentEnd="true"
-                android:layout_alignBottom="@id/customershopnametext"
+                android:layout_alignBottom="@id/shopsellcustomerphonetext"
                 android:layout_marginTop="7dp"
                 android:layout_marginEnd="5dp"/>
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>
+
 </RelativeLayout>

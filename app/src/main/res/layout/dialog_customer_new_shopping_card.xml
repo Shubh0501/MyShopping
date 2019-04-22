@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/mainBackgound"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/dialogcardnumberet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorText"
+        android:hint="Card Number"
+        android:textColorHint="@color/colorText"
+        android:gravity="center"
+        android:inputType="text"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <EditText
+        android:id="@+id/dialogbanknameet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorText"
+        android:hint="Bank Name"
+        android:textColorHint="@color/colorText"
+        android:gravity="center"
+        android:inputType="text"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/dialogcardnumberet"
+        />
+
+    <EditText
+        android:id="@+id/dialogcreditset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorText"
+        android:hint="Credits"
+        android:textColorHint="@color/colorText"
+        android:gravity="center"
+        android:inputType="number"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/dialogbanknameet"
+        />
+
+    <Button
+        android:id="@+id/dialogaddcardbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ADD"
+        android:textSize="22sp"
+        android:background="@color/mainBackgound"
+        android:textColor="@color/colorText"
+        android:layout_below="@id/dialogcreditset"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

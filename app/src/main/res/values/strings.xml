@@ -16,4 +16,10 @@
     <string name="title_sell_list">Receipts</string>
     <string name="title_products">Products</string>
     <string name="title_employee">Employees</string>
+    <string name="edit_details">Edit Details</string>
+    <string name="name">Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="save">Save</string>
+    <string name="show_password">Show Password</string>
+    <string name="title_add_card">Cards</string>
 </resources>

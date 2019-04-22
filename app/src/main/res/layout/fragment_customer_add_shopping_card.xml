@@ -5,8 +5,18 @@
     android:background="@color/mainBackgound"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/customeraddnewshoppingcardbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mainBackgound"
+        android:text="ADD NEW"
+        android:textSize="20sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/shopproductlistrecyclerview"
+        android:id="@+id/customershoppingcardrecyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp"

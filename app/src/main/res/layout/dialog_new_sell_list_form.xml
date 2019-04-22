@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/mainBackgound"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/dialogtransactionidet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorText"
+        android:hint="Transaction ID"
+        android:textColorHint="@color/colorText"
+        android:gravity="center"
+        android:inputType="text"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <EditText
+        android:id="@+id/dialogcustomerphonenumberet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorText"
+        android:hint="Customer Phone Number"
+        android:textColorHint="@color/colorText"
+        android:gravity="center"
+        android:inputType="number"
+        android:layout_below="@id/dialogtransactionidet"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:id="@+id/dialogproductidet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorText"
+        android:hint="Product ID"
+        android:textColorHint="@color/colorText"
+        android:gravity="center"
+        android:inputType="text"
+        android:layout_below="@id/dialogcustomerphonenumberet"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <EditText
+        android:id="@+id/dialogproductquantityet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorText"
+        android:hint="Product Quantity"
+        android:textColorHint="@color/colorText"
+        android:gravity="center"
+        android:inputType="number"
+        android:layout_below="@id/dialogproductidet"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <EditText
+        android:id="@+id/dialogdateet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorText"
+        android:hint="Date(DD/MM/YY)"
+        android:textColorHint="@color/colorText"
+        android:gravity="center"
+        android:inputType="text"
+        android:layout_below="@id/dialogproductquantityet"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/dialogsavebutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ADD"
+        android:textSize="22sp"
+        android:background="@color/mainBackgound"
+        android:textColor="@color/colorText"
+        android:layout_below="@id/dialogdateet"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"/>
+
+
+</RelativeLayout>

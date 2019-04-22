@@ -3,7 +3,6 @@ package com.myshopping.myshopping.UserInterface.Customer.Adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,17 +27,15 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.
-                card_view_customer_recycler_view, viewGroup, true);
+                card_view_customer_recycler_view, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Log.e("phone", "adapter");
         ListItem item = listItems.get(i);
-        viewHolder.product_name.setText(item.getProduct_name());
-        viewHolder.shop_name.setText(item.getShop_name());
-        viewHolder.quantity.setText("Quantity: "+item.getProduct_quantity());
+        viewHolder.transaction_id.setText("ID: "+item.getTransaction_id());
+        viewHolder.shop_name.setText("Shop: "+item.getShop_name());
         viewHolder.date.setText("Date: "+item.getDate());
     }
 
@@ -48,18 +45,16 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView product_name;
+        private TextView transaction_id;
         private TextView shop_name;
         private TextView date;
-        private TextView quantity;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            product_name =itemView.findViewById(R.id.customerproductnametext);
+            transaction_id =itemView.findViewById(R.id.customertransactionidtext);
             shop_name = itemView.findViewById(R.id.customershopnametext);
             date = itemView.findViewById(R.id.customerdatetext);
-            quantity = itemView.findViewById(R.id.customerquantitytext);
 
             itemView.setOnClickListener(this);
         }

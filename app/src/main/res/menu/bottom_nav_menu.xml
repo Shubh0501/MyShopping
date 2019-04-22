@@ -7,9 +7,9 @@
         android:title="@string/title_shopping_list" />
 
     <item
-        android:id="@+id/navigation_customer_search"
-        android:icon="@android:drawable/ic_search_category_default"
-        android:title="@string/title_search" />
+        android:id="@+id/navigation_customer_add_shopping_card"
+        android:icon="@android:drawable/sym_contact_card"
+        android:title="@string/title_add_card" />
 
     <item
         android:id="@+id/navigation_customer_account"

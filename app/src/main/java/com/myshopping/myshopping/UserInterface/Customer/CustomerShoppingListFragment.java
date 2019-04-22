@@ -53,6 +53,9 @@ public class CustomerShoppingListFragment extends Fragment {
         list.setHasFixedSize(true);
         list.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
         items = new ArrayList<>();
+        adapter = new CustomerAdapter(this.getActivity(), items);
+        list.setAdapter(adapter);
+
         SharedPreferences preferences = getActivity().getSharedPreferences
                 (Utils.APPLICATION_NAME, getActivity().MODE_PRIVATE);
         String customer_phone_number = preferences.getString(Utils.CUSTOMER_PHONE_NUMBER, "0000000000");
@@ -70,9 +73,8 @@ public class CustomerShoppingListFragment extends Fragment {
                     @Override
                     public void onResponse(JSONArray response) {
                         shopping_list = response;
-                        ListItem item = new ListItem();
                         for(int i = 0; i < response.length(); i++){
-                            Log.e("phone", "loop");
+                            ListItem item = new ListItem();
                             JSONObject here = null;
                             try {
                                 here = response.getJSONObject(i);
@@ -81,14 +83,11 @@ public class CustomerShoppingListFragment extends Fragment {
                                         Toast.LENGTH_SHORT).show();
                             }
                             try {
-                                Log.e("phone", String.valueOf(response.length()));
                                 String shop_username = here.getString("shop_username");
-                                String quantity = here.getString("quantity");
                                 String datetime = here.getString("datetime");
-                                String product_name = here.getString("product_name");
-                                item.setProduct_name(product_name);
+                                String transaction_id = here.getString("transaction_id");
+                                item.setTransaction_id(transaction_id);
                                 item.setDate(datetime);
-                                item.setProduct_quantity(quantity);
                                 item.setShop_name(shop_username);
                             } catch (JSONException e) {
                                 Toast.makeText(getContext(), Utils.ERROR_GETTING_DATA,
@@ -96,6 +95,7 @@ public class CustomerShoppingListFragment extends Fragment {
                             }
                             items.add(item);
                         }
+                        adapter.notifyDataSetChanged();
                     }
                 },
                 new Response.ErrorListener() {
@@ -106,9 +106,5 @@ public class CustomerShoppingListFragment extends Fragment {
                     }
                 });
         queue.add(request);
-
-        adapter = new CustomerAdapter(this.getActivity(), items);
-        list.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
     }
 }

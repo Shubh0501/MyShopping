@@ -17,6 +17,11 @@ public class Utils {
     public static final String SHOPPING_CARD_FORM = URL + "/ShoppingCardForm";
     public static final String NEW_SHOPPING = URL + "/NewShopping";
     public static final String GET_SHOPPING_LIST = URL + "/GetShoppingList";
+    public static final String GET_SELLING_LIST = URL + "/GetSellingList";
+    public static final String GET_EMPLOYEE_LIST = URL + "/GetEmployeeList";
+    public static final String GET_PRODUCT_LIST = URL + "/GetProductList";
+    public static final String GET_SHOP_LIST = URL + "/GetShopList";
+    public static final String GET_SHOPPING_CARD = URL + "/GetShoppingCard";
 
     //CONSTANTS
     public static final String APPLICATION_NAME = "MyShopping";

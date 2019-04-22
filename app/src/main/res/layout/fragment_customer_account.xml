@@ -2,55 +2,57 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
     android:background="@color/mainBackgound">
 
     <TextView
-        android:id="@+id/customerwelcometext"
+        android:id="@+id/customernametext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorText"
-        android:textSize="36sp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
         android:gravity="center"
-        />
+        android:textColor="@color/colorText"
+        android:textSize="26sp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/customerphonenumbertext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:layout_below="@id/customerwelcometext"
-        android:layout_marginTop="100dp"
         android:gravity="center"
+        android:textColor="@color/colorText"
+        android:textSize="26sp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/customernametext"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/customerpasswordtext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/colorText"
+        android:textSize="26sp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/customerphonenumbertext"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/customershowpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/colorText"
+        android:textSize="26sp"
+        android:text="@string/show_password"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/customerpasswordtext"
+        android:background="@color/mainBackgound"
+        android:textStyle="bold"
         />
 
-    <Button
-        android:id="@+id/customerupdatepasswordbutton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Update Password"
-        android:layout_centerHorizontal="true"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
-        android:textColor="@color/colorText"
-        android:textSize="20sp"
-        android:layout_below="@id/customerphonenumbertext"
-        android:layout_marginTop="60dp"
-        android:background="@color/mainBackgound"/>
 
-    <Button
-        android:id="@+id/customersavechanges"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Save Changes"
-        android:layout_centerHorizontal="true"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
-        android:textColor="@color/colorText"
-        android:textSize="20sp"
-        android:layout_below="@id/customerupdatepasswordbutton"
-        android:layout_marginTop="60dp"
-        android:background="@color/mainBackgound"/>
+    
 
 </RelativeLayout>

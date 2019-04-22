@@ -1,6 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/mainBackgound"
+    android:layout_gravity="center"
+    android:gravity="center"
     android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/shopusernametext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/colorText"
+        android:textSize="26sp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/shopnametext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/colorText"
+        android:textSize="26sp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:layout_below="@id/shopusernametext"/>
+
+    <TextView
+        android:id="@+id/shopownernametext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/colorText"
+        android:textSize="26sp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:layout_below="@id/shopnametext"/>
+
+    <TextView
+        android:id="@+id/shopownerphonenumbertext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/colorText"
+        android:textSize="26sp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:layout_below="@id/shopownernametext"/>
+
+    <TextView
+        android:id="@+id/shoppasswordtext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/colorText"
+        android:textSize="26sp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:layout_below="@id/shopownerphonenumbertext"/>
+
+    <Button
+        android:id="@+id/shopshowpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/colorText"
+        android:textSize="26sp"
+        android:text="@string/show_password"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/shoppasswordtext"
+        android:background="@color/mainBackgound"
+        android:textStyle="bold"/>
+</RelativeLayout>

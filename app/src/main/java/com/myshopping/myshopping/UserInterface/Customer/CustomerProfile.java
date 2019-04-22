@@ -16,6 +16,7 @@ public class CustomerProfile extends AppCompatActivity {
     private FragmentManager manager;
     private FragmentTransaction transaction;
     private ScrollView fragmentcontainer;
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -29,13 +30,15 @@ public class CustomerProfile extends AppCompatActivity {
                     transaction.add(fragmentcontainer.getId(), shoppingListFragment);
                     transaction.commit();
                     return true;
-                case R.id.navigation_customer_search:
+
+                case R.id.navigation_customer_add_shopping_card:
                     fragmentcontainer.removeAllViews();
                     transaction = manager.beginTransaction();
-                    CustomerSearchFragment searchFragment = new CustomerSearchFragment();
-                    transaction.add(fragmentcontainer.getId(), searchFragment);
+                    CustomerAddShoppingCardFragment shoppingCardFragment= new CustomerAddShoppingCardFragment();
+                    transaction.add(fragmentcontainer.getId(), shoppingCardFragment);
                     transaction.commit();
                     return true;
+
                 case R.id.navigation_customer_account:
                     fragmentcontainer.removeAllViews();
                     transaction = manager.beginTransaction();

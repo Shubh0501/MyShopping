@@ -15,7 +15,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/shop_bottom_nav_view" />
 
     <ScrollView
         android:id="@+id/shopfragmentcontainer"

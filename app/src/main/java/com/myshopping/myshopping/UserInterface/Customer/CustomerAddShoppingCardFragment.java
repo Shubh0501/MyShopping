@@ -1,7 +1,6 @@
-package com.myshopping.myshopping.UserInterface.Shop;
+package com.myshopping.myshopping.UserInterface.Customer;
 
 import android.app.Dialog;
-import android.app.DownloadManager;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,8 +23,8 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.myshopping.myshopping.R;
-import com.myshopping.myshopping.UserInterface.Shop.Adapter.ShopSellListAdapter;
-import com.myshopping.myshopping.UserInterface.Shop.Model.SellingListItem;
+import com.myshopping.myshopping.UserInterface.Customer.Adapter.CustomerShoppingCardAdapter;
+import com.myshopping.myshopping.UserInterface.Customer.Model.ShoppingCardList;
 import com.myshopping.myshopping.Util.Utils;
 
 import org.json.JSONArray;
@@ -35,23 +34,23 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopSellListFragment extends Fragment implements View.OnClickListener {
-
+public class CustomerAddShoppingCardFragment extends Fragment implements View.OnClickListener {
     private View view;
     private RecyclerView list;
-    private Button newselling;
+    private Button new_card;
     private RecyclerView.Adapter adapter;
-    private List<SellingListItem> items;
+    private List<ShoppingCardList> items;
     private final JSONObject json = new JSONObject();
-    private JSONArray selling_list;
-    private String shop_username;
+    private JSONArray shopping_card_list;
+    private String customer_phone_number;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_shop_sell_list, container, false);
-        list = view.findViewById(R.id.recyclerviewshopselllist);
-        newselling = view.findViewById(R.id.shopaddnewsellbutton);
-        newselling.setOnClickListener(this);
+        view = inflater.inflate(R.layout.fragment_customer_add_shopping_card, container, false);
+        list = view.findViewById(R.id.customershoppingcardrecyclerview);
+        new_card = view.findViewById(R.id.customeraddnewshoppingcardbutton);
+        new_card.setOnClickListener(this);
         return view;
     }
 
@@ -61,16 +60,16 @@ public class ShopSellListFragment extends Fragment implements View.OnClickListen
         list.setHasFixedSize(true);
         list.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
         items = new ArrayList<>();
-        adapter = new ShopSellListAdapter(this.getActivity(), items);
+        adapter = new CustomerShoppingCardAdapter(this.getActivity(), items);
         list.setAdapter(adapter);
 
         SharedPreferences preferences = getActivity().getSharedPreferences
                 (Utils.APPLICATION_NAME, getActivity().MODE_PRIVATE);
-        shop_username = preferences.getString(Utils.SHOP_USERNAME, "xxx");
-        String url = Utils.GET_SELLING_LIST;
+        customer_phone_number = preferences.getString(Utils.CUSTOMER_PHONE_NUMBER, "0000000000");
+        String url = Utils.GET_SHOPPING_CARD;
         RequestQueue queue = Volley.newRequestQueue(getContext());
         try {
-            json.put("shop_username", shop_username);
+            json.put("customer_phone_number", customer_phone_number);
         } catch (JSONException e) {
             Toast.makeText(getContext(), Utils.ERROR_GETTING_DATA, Toast.LENGTH_SHORT).show();
         }
@@ -80,9 +79,9 @@ public class ShopSellListFragment extends Fragment implements View.OnClickListen
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        selling_list = response;
+                        shopping_card_list = response;
                         for(int i = 0; i < response.length(); i++){
-                            SellingListItem item = new SellingListItem();
+                            ShoppingCardList item = new ShoppingCardList();
                             JSONObject here = null;
                             try {
                                 here = response.getJSONObject(i);
@@ -91,12 +90,12 @@ public class ShopSellListFragment extends Fragment implements View.OnClickListen
                                         Toast.LENGTH_SHORT).show();
                             }
                             try {
-                                String customer_phone_number = here.getString("customer_phone_number");
-                                String datetime = here.getString("datetime");
-                                String transaction_id = here.getString("transaction_id");
-                                item.setTransaction_id(transaction_id);
-                                item.setDate(datetime);
-                                item.setCustomer_phone_number(customer_phone_number);
+                                String card_number = here.getString("card_number");
+                                String bank_name = here.getString("bank_name");
+                                String credits = here.getString("credits");
+                                item.setCard_number(card_number);
+                                item.setBank_name(bank_name);
+                                item.setCredits(credits);
                             } catch (JSONException e) {
                                 Toast.makeText(getContext(), Utils.ERROR_GETTING_DATA,
                                         Toast.LENGTH_SHORT).show();
@@ -118,35 +117,27 @@ public class ShopSellListFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        final Dialog dialog = new Dialog(this.getActivity());
+        final Dialog dialog = new Dialog(getContext());
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.setContentView(R.layout.dialog_new_sell_list_form);
-        final EditText transaction_id = dialog.findViewById(R.id.dialogtransactionidet);
-        final EditText customer_number = dialog.findViewById(R.id.dialogcustomerphonenumberet);
-        final EditText product_id = dialog.findViewById(R.id.dialogproductidet);
-        final EditText product_quantity = dialog.findViewById(R.id.dialogproductquantityet);
-        final EditText date = dialog.findViewById(R.id.dialogdateet);
-        Button save = dialog.findViewById(R.id.dialogsavebutton);
-
+        dialog.setContentView(R.layout.dialog_customer_new_shopping_card);
+        final EditText cardnumber = dialog.findViewById(R.id.dialogcardnumberet);
+        final EditText bankname = dialog.findViewById(R.id.dialogbanknameet);
+        final EditText credits = dialog.findViewById(R.id.dialogcreditset);
+        Button save = dialog.findViewById(R.id.dialogaddcardbutton);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String transaction = transaction_id.getText().toString();
-                final String number = customer_number.getText().toString();
-                String product = product_id.getText().toString();
-                int quantity = Integer.parseInt(product_quantity.getText().toString());
-                final String datetime = date.getText().toString();
-
-                String url = Utils.NEW_SHOPPING;
+                final String card = cardnumber.getText().toString();
+                final String bank = bankname.getText().toString();
+                final String cre = credits.getText().toString();
+                String url = Utils.SHOPPING_CARD_FORM;
                 RequestQueue queue = Volley.newRequestQueue(getContext());
                 JSONObject object = new JSONObject();
                 try {
-                    object.put("transaction_id", transaction);
-                    object.put("customer_phone_number", number);
-                    object.put("shop_username", shop_username);
-                    object.put("product_id", product);
-                    object.put("quantity", quantity);
-                    object.put("datetime", datetime);
+                    object.put("card_number", card);
+                    object.put("bank_name", bank);
+                    object.put("credits", cre);
+                    object.put("customer_id", customer_phone_number);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -155,12 +146,12 @@ public class ShopSellListFragment extends Fragment implements View.OnClickListen
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                SellingListItem item = new SellingListItem();
-                                item.setCustomer_phone_number(number);
-                                item.setDate(datetime);
-                                item.setTransaction_id(transaction);
+                                ShoppingCardList item = new ShoppingCardList();
+                                item.setCard_number(card);
+                                item.setBank_name(bank);
+                                item.setCredits(cre);
                                 items.add(item);
-                                selling_list.put(temp);
+                                shopping_card_list.put(temp);
                                 adapter.notifyDataSetChanged();
                             }
                         },
